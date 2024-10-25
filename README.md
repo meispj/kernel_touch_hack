@@ -1,0 +1,2 @@
+# kernel_touch_hack
+有的机型有些问题需要自行适配
