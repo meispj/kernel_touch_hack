@@ -1,3 +1,4 @@
+#include <cstdio>
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/fcntl.h>
@@ -36,6 +37,7 @@ void upthouch (bool isdown,int x,int y)
     y_proportion = abs(Height / scr_y);
 	UpTouch uptc;
 	uptc.isdown=isdown;
+
 
 	if (displayInfo.orientation == 0)
     {
