@@ -1,2 +1,4 @@
 # kernel_touch_hack
 有的机型有些问题需要自行适配
+find_free_slot函数获取空闲手指有问题
+可以使用固定的slot
