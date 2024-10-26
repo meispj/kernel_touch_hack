@@ -1,6 +1,7 @@
 #include <linux/uaccess.h>
 #include <linux/miscdevice.h>
 #include <linux/list.h>
+#include <linux/version.h>
 #include "Input.h"
 #define DEVICE_NAME "PeiJue"
 int dispatch_open(struct inode *node, struct file *file)
@@ -74,9 +75,13 @@ struct miscdevice misc = {
 
 static int __init kprobe_init(void) {
     int ret;
+    #if (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 4, 61))
     register_kprobe(&kp);//4系列不支持kprobe来获取函数指针但是有符号导出
     kallsyms_lookup_name_ptr = (kallsyms_lookup_name_t)kp.addr;
     input_dev_list = (struct list_head *)kallsyms_lookup_name_ptr("input_dev_list");
+    #else
+    input_dev_list=kallsyms_lookup_name("input_dev_list");
+    #endif
     printk("[+] driver_entry");
 	ret = misc_register(&misc);
     return ret;
